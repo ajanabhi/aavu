@@ -31,7 +31,7 @@ class DesktopNavWrapper extends StatelessWidget {
       width: context.screenSize.width,
       height: context.screenSize.height,
       child: Row(
-        children: [DesktopNav(), screen],
+        children: [DesktopNav(), Expanded(child: screen)],
       ),
     );
   }
