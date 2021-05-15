@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import "package:aavu_admin/utils/utils.dart";
 
-class Responive extends StatelessWidget {
+class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget tablet;
   final Widget desktop;
 
-  const Responive(
+  const Responsive(
       {Key? key,
       required this.mobile,
       required this.tablet,
