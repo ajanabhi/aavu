@@ -1,3 +1,6 @@
+@JS()
+library aavu_schema;
+
 import 'package:aavu_schemas/dgraph/aavu/objects.dart';
 import 'package:dstore/dstore.dart';
 import "package:js/js.dart";
