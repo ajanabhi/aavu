@@ -4,19 +4,22 @@ import "package:aavu_admin/utils/utils.dart";
 class DesktopNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(
-          leading: Icon(Icons.home),
-          title: Text("Home"),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: Icon(Icons.upload_rounded),
-          title: Text("Uploads"),
-          onTap: () {},
-        )
-      ],
+    return SizedBox(
+      width: 300,
+      child: ListView(
+        children: [
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.upload_rounded),
+            title: Text("Uploads"),
+            onTap: () {},
+          )
+        ],
+      ),
     );
   }
 }
