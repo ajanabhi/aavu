@@ -1,5 +1,5 @@
-name: admin
-description: A new Flutter project.
+name: aavu_admin
+description: Admin dashboard for aavu :) 
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
