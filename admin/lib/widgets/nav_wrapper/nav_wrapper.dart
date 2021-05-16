@@ -27,6 +27,14 @@ class DesktopNav extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacementNamed(Routes.uploads);
             },
+          ),
+          ListTile(
+            leading: Icon(Icons.upload_rounded),
+            selected: name == Routes.breeds,
+            title: Text("Breeds"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(Routes.breeds);
+            },
           )
         ],
       ),
@@ -47,6 +55,7 @@ class DesktopNavWrapper extends StatelessWidget {
         width: context.screenSize.width,
         height: context.screenSize.height,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DesktopNav(
               name: name,
@@ -76,6 +85,8 @@ class MobileTabletNavWrapper extends StatelessWidget {
             Navigator.pushReplacementNamed(context, Routes.home);
           } else if (value == 1) {
             Navigator.pushReplacementNamed(context, Routes.uploads);
+          } else if (value == 2) {
+            Navigator.pushReplacementNamed(context, Routes.breeds);
           }
         },
         items: [
@@ -84,7 +95,8 @@ class MobileTabletNavWrapper extends StatelessWidget {
             label: "Home",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.upload_rounded), label: "Uploads")
+              icon: Icon(Icons.upload_rounded), label: "Uploads"),
+          BottomNavigationBarItem(icon: Icon(Icons.code), label: "Breeds")
         ],
       ),
     );
@@ -95,6 +107,8 @@ class MobileTabletNavWrapper extends StatelessWidget {
       return 0;
     } else if (name == Routes.uploads) {
       return 1;
+    } else if (name == Routes.breeds) {
+      return 2;
     } else {
       return 0;
     }

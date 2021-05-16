@@ -2,5 +2,13 @@ type Breed   {
     name: String! @id
 info: String! 
 images: [String!]! 
+energyPoints: [EnergyPoint!]! @hasInverse(field: breeds)
+    
+   }
+  
+     type EnergyPoint   {
+    id: ID! 
+pont: Point! 
+breeds: [Breed!]! @hasInverse(field: energyPoints)
     
    }

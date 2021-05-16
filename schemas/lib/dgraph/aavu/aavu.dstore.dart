@@ -19,8 +19,28 @@ abstract class Breed {
   external List<dynamic> get images;
   external set images(List<dynamic> value);
 
+  external List<dynamic> get energyPoints;
+  external set energyPoints(List<dynamic> value);
+
   external factory Breed(
       {required String name,
       required String info,
-      required List<String> images});
+      required List<String> images,
+      required List<EnergyPoint> energyPoints});
+}
+
+@JS()
+@anonymous
+abstract class EnergyPoint {
+  external ID get id;
+  external set id(ID value);
+
+  external Point get pont;
+  external set pont(Point value);
+
+  external List<dynamic> get breeds;
+  external set breeds(List<dynamic> value);
+
+  external factory EnergyPoint(
+      {required ID id, required Point pont, required List<Breed> breeds});
 }

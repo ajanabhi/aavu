@@ -9,6 +9,10 @@ part "aavu.dstore.dart";
 
 @GraphqlSchemaSource(
     path: "./schema_source/dgraphq/aavu.graphql",
+    schemaUplodDetails: SchemaUploadRequest(
+      url: "http://localhost:8080/admin",
+    ),
+    uploadSchema: true,
     database: GraphqlDatabase.dgraph,
     revision: "0.1.2")
 class AaavuSchema {

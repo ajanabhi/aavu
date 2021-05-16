@@ -1,3 +1,4 @@
+import 'package:aavu_admin/screens/breeds/breeds_screen.dart';
 import 'package:aavu_admin/screens/uploads/uploads_screen.dart';
 import 'package:aavu_admin/widgets/nav_wrapper/nav_wrapper.dart';
 import 'package:aavu_admin/screens/home/home_screen.dart';
@@ -7,10 +8,11 @@ import 'package:flutter/material.dart';
 abstract class Routes {
   static const home = "/";
   static const uploads = "/uploads";
+  static const breeds = "/breeds";
   static MaterialPageRoute all(RouteSettings settings) {
     final url = settings.name;
     if (url == home) {
-      return MaterialPageRoute(builder: (context) {
+      return MaterialPageRoute<dynamic>(builder: (context) {
         return Responsive(
             mobile: MobileTabletNavWrapper(
               screen: HomeScreen(),
@@ -22,8 +24,21 @@ abstract class Routes {
             ),
             desktop: DesktopNavWrapper(screen: HomeScreen(), name: home));
       });
+    } else if (url == breeds) {
+      return MaterialPageRoute<dynamic>(builder: (context) {
+        return Responsive(
+            mobile: MobileTabletNavWrapper(
+              screen: BreedsScreen(),
+              name: uploads,
+            ),
+            tablet: MobileTabletNavWrapper(
+              screen: BreedsScreen(),
+              name: uploads,
+            ),
+            desktop: DesktopNavWrapper(screen: BreedsScreen(), name: breeds));
+      });
     } else {
-      return MaterialPageRoute(builder: (context) {
+      return MaterialPageRoute<dynamic>(builder: (context) {
         return Responsive(
             mobile: MobileTabletNavWrapper(
               screen: UploadScreen(),
