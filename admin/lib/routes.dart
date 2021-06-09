@@ -1,4 +1,5 @@
 import 'package:aavu_admin/screens/breeds/breeds_screen.dart';
+import 'package:aavu_admin/screens/gosala/gosala_screen.dart';
 import 'package:aavu_admin/screens/uploads/uploads_screen.dart';
 import 'package:aavu_admin/widgets/nav_wrapper/nav_wrapper.dart';
 import 'package:aavu_admin/screens/home/home_screen.dart';
@@ -9,6 +10,7 @@ abstract class Routes {
   static const home = "/";
   static const uploads = "/uploads";
   static const breeds = "/breeds";
+  static const gosalas = "/gosalas";
   static MaterialPageRoute all(RouteSettings settings) {
     final url = settings.name;
     if (url == home) {
@@ -36,6 +38,19 @@ abstract class Routes {
               name: uploads,
             ),
             desktop: DesktopNavWrapper(screen: BreedsScreen(), name: breeds));
+      });
+    } else if (url == gosalas) {
+      return MaterialPageRoute<dynamic>(builder: (context) {
+        return Responsive(
+            mobile: MobileTabletNavWrapper(
+              screen: GosalaScreen(),
+              name: uploads,
+            ),
+            tablet: MobileTabletNavWrapper(
+              screen: GosalaScreen(),
+              name: uploads,
+            ),
+            desktop: DesktopNavWrapper(screen: GosalaScreen(), name: gosalas));
       });
     } else {
       return MaterialPageRoute<dynamic>(builder: (context) {

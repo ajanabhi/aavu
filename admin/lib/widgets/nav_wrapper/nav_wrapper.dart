@@ -29,11 +29,19 @@ class DesktopNav extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.upload_rounded),
+            leading: Icon(Icons.code),
             selected: name == Routes.breeds,
             title: Text("Breeds"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(Routes.breeds);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.h_mobiledata),
+            selected: name == Routes.breeds,
+            title: Text("Gosalas"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(Routes.gosalas);
             },
           )
         ],

@@ -10,11 +10,17 @@ class Breed {
   late List<EnergyPoint> energyPoints;
 }
 
+// Gosala
 class EnergyPoint {
   late ID id;
-  late Point pont;
+  late Point point;
+  late String? name;
+  late String place_id;
+  late String address;
+  late String info;
+  late int? year; // established_year
   @hasInverse("energyPoints")
-  late List<Breed> breeds;
+  late List<Breed> cows;
 }
 
 class Point {

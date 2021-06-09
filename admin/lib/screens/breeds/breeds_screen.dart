@@ -225,7 +225,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
         if (images != initialImages) {
           patch["images"] = jsonDecode(images);
         }
-        await AavuServices.updateBreed(name: name, patch: patch);
+        await BreedServices.updateBreed(name: name, patch: patch);
         Navigator.pop(context, <String, dynamic>{
           "name": name,
           "images": jsonDecode(images),
@@ -320,7 +320,7 @@ class __DeleteDialogState extends State<_DeleteDialog> {
 
   void deleteBreed(BuildContext context) async {
     try {
-      await AavuServices.deleteBreed(widget.name);
+      await BreedServices.deleteBreed(widget.name);
     } catch (e) {
       setState(() {
         error = "$e";
