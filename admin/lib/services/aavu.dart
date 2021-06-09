@@ -60,8 +60,9 @@ abstract class BreedServices {
   }
 }
 
-abstract class GosalaServices {
-  static Future<GoShalaa> getGoshalaDetails(double lat, double long) async {
+abstract class EnergyPointServices {
+  static Future<EnergyPoint> getEnergyPointDetails(
+      double lat, double long) async {
     try {
       final url =
           "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=AIzaSyAgiMZMCBYsBvhEFxe1Nrtx47MEX8Pgjck";
@@ -76,7 +77,7 @@ abstract class GosalaServices {
         final address_components = map["address_components"] as List<dynamic>;
         final geometry = map["geometry"] as Map<String, dynamic>;
 
-        return GoShalaa(
+        return EnergyPoint(
             latitude: lat,
             longitude: long,
             address: address,
@@ -92,18 +93,18 @@ abstract class GosalaServices {
             "Error calling api ${resp.data}  statuscode : ${resp.statusCode}");
       }
     } catch (e) {
-      print("Error in getting goshala details $e");
+      print("Error in getting EnergyPoint details $e");
       rethrow;
     }
   }
 
-  static Future<dynamic> addGoshala(
+  static Future<dynamic> addEnergyPoint(
       {required double latitude,
       required double longitude,
       int? year,
       String? name}) async {
     try {
-      final tempGS = await getGoshalaDetails(latitude, longitude);
+      final tempGS = await getEnergyPointDetails(latitude, longitude);
 
       final query = """
       mutation ag(\$input: [AddEnergyPointInput!]!) {
@@ -113,41 +114,34 @@ abstract class GosalaServices {
       }
     """;
 
-      final variables = <String, dynamic>{
-        "place_id": tempGS.place_id,
-        "address": tempGS.address,
-        "info": tempGS.info,
-        "name": name,
-        "point": {"latitude": latitude, "longitude": longitude}
+      final data = <String, dynamic>{
+        "query": """
+      mutation ag(\$input: [AddEnergyPointInput!]!) {
+        addEnergyPoint(input:\$input) {
+           id
+        }
+      }
+    """,
+        "variables": <String, dynamic>{
+          "place_id": tempGS.place_id,
+          "address": tempGS.address,
+          "info": tempGS.info,
+          "name": name,
+          "point": {"latitude": latitude, "longitude": longitude}
+        }
       };
-
-      final mq = {"query": query, "variables": variables};
 
       final dio = Dio();
 
       final resp = await dio.post<Map<String, dynamic>>(api_url,
-          data: mq, options: _defaultOptions);
+          data: data, options: _defaultOptions);
       processResponse(resp);
     } catch (e) {
       rethrow;
     }
   }
 
-  static dynamic processResponse(Response<Map<String, dynamic>> resp) {
-    if (resp.data != null) {
-      final data = resp.data!;
-      if (data["data"] != null) {
-        return data["data"]!;
-      } else {
-        throw Exception("Error in creating goshala ${data["errors"]}");
-      }
-    } else {
-      throw Exception(
-          "Error in creating goshala ${resp.data} status : ${resp.statusCode}");
-    }
-  }
-
-  static Future<dynamic> updateGoshala(
+  static Future<dynamic> updateEnergyPoint(
       {required String id, required Map<String, dynamic> patch}) async {
     try {
       final data = {
@@ -171,7 +165,7 @@ abstract class GosalaServices {
     }
   }
 
-  static Future<void> deleteGoshala(String id) async {
+  static Future<void> deleteEnergyPoint(String id) async {
     try {
       final data = {
         "query": """
@@ -185,6 +179,48 @@ abstract class GosalaServices {
       """,
         "variables": {"id": id}
       };
+
+      final resp = await dio.post<Map<String, dynamic>>(api_url,
+          data: data, options: _defaultOptions);
+      processResponse(resp);
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
+
+dynamic processResponse(Response<Map<String, dynamic>> resp) {
+  if (resp.data != null) {
+    final data = resp.data!;
+    if (data["data"] != null) {
+      return data["data"]!;
+    } else {
+      throw Exception("Error in creating EnergyPoint ${data["errors"]}");
+    }
+  } else {
+    throw Exception(
+        "Error in creating EnergyPoint ${resp.data} status : ${resp.statusCode}");
+  }
+}
+
+abstract class CowServices {
+  static Future<dynamic> addCow(
+      {required String energyPointId,
+      required String breedId,
+      required String? name}) async {
+    try {
+      final data = <String, dynamic>{
+        "query": """
+      mutation ac(\$input: [AddCowInput!]!) {
+        addCow(input:\$input) {
+           id
+        }
+      }
+    """,
+        "variables": <String, dynamic>{
+          "name": name,
+        }
+      }; //TODO findout how to pass ids of relation ships
 
       final resp = await dio.post<Map<String, dynamic>>(api_url,
           data: data, options: _defaultOptions);

@@ -43,6 +43,14 @@ class DesktopNav extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacementNamed(Routes.gosalas);
             },
+          ),
+          ListTile(
+            leading: Icon(Icons.h_mobiledata),
+            selected: name == Routes.cows,
+            title: Text("Cows"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(Routes.cows);
+            },
           )
         ],
       ),

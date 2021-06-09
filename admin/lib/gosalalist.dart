@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class GoShalaa {
+class EnergyPoint {
   final double latitude;
   final double longitude;
   final String address;
@@ -9,7 +9,7 @@ class GoShalaa {
   final String info;
   final Map<String, dynamic> extra;
 
-  GoShalaa(
+  EnergyPoint(
       {required this.latitude,
       required this.longitude,
       required this.address,
@@ -33,8 +33,8 @@ abstract class CrentialsKey {
 // Docs - https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
 // API - https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
 
-final gosala_list = <GoShalaa>{
-  GoShalaa(
+final gosala_list = <EnergyPoint>{
+  EnergyPoint(
       latitude: 16.84655252940305,
       longitude: 80.12931197132839,
       address: "",
@@ -44,7 +44,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.5137301,80.183557,10z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35a7a436fb01ef:0x8eb452eac0a3e61b!2m2!1d80.1286527!2d16.8210968?hl=en"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.49588986570716,
       longitude: 80.65984242223406,
       address: "",
@@ -54,7 +54,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.567347997248536,
       longitude: 80.72644704031381,
       address: "",
@@ -64,7 +64,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.567347997248536,
       longitude: 80.72644704031381,
       address: "",
@@ -74,7 +74,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.47482045541026,
       longitude: 80.68387501577091,
       address: "",
@@ -84,7 +84,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.32720878326027,
       longitude: 80.38500920459133,
       address: "",
@@ -94,7 +94,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.29474878863179,
       longitude: 80.26375926761365,
       address: "",
@@ -104,7 +104,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.42943496707681,
       longitude: 80.45904455676813,
       address: "",
@@ -114,7 +114,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.216999254451856,
       longitude: 81.13879553875128,
       address: "",
@@ -124,7 +124,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.861209419486183,
       longitude: 81.42824953379412,
       address: "",
@@ -134,7 +134,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.4543500250503,
       longitude: 80.74182908279275,
       address: "",
@@ -144,7 +144,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 17.006135144795866,
       longitude: 82.00567229500636,
       address: "",
@@ -154,7 +154,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.530108065914526,
       longitude: 80.63306324711368,
       address: "",
@@ -164,7 +164,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.214361938932186,
       longitude: 81.13742224769203,
       address: "",
@@ -174,7 +174,7 @@ final gosala_list = <GoShalaa>{
         "google place url ":
             "https://www.google.com/maps/dir/16.1812399,80.7961248/goshala+near+me/@16.3411081,80.5695485,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a35fbe7e7526d07:0x847a56447b5cd8e1!2m2!1d80.6603402!2d16.4838083"
       }),
-  GoShalaa(
+  EnergyPoint(
       latitude: 16.555297428363243,
       longitude: 80.53213511873952,
       address: "",
@@ -188,7 +188,7 @@ final gosala_list = <GoShalaa>{
 
 // 16.49588986570716, 80.65984242223406
 abstract class GosalaPlacesAPI {
-  static Future<GoShalaa> getGoshalaDetails(double lat, double long) async {
+  static Future<EnergyPoint> getGoshalaDetails(double lat, double long) async {
     try {
       final url =
           "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=AIzaSyAgiMZMCBYsBvhEFxe1Nrtx47MEX8Pgjck";
@@ -203,7 +203,7 @@ abstract class GosalaPlacesAPI {
         final address_components = map["address_components"] as List<dynamic>;
         final geometry = map["geometry"] as Map<String, dynamic>;
 
-        return GoShalaa(
+        return EnergyPoint(
             latitude: lat,
             longitude: long,
             address: address,

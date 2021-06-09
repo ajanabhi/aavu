@@ -1,17 +1,17 @@
 import 'package:dstore/dstore.dart';
 import 'package:dstore_dgraph/dgraph.dart';
 
-class Breed {
+abstract class Breed {
   @id()
   late String name;
   late String info;
   late List<String> images;
-  @hasInverse("breeds")
-  late List<EnergyPoint> energyPoints;
+  @hasInverse("breed")
+  late List<Cow> cows;
 }
 
-// Gosala
-class EnergyPoint {
+// Gosala or Any Farmer / Any one who raising cows
+abstract class EnergyPoint {
   late ID id;
   late Point point;
   late String? name;
@@ -20,10 +20,18 @@ class EnergyPoint {
   late String info;
   late int? year; // established_year
   @hasInverse("energyPoints")
-  late List<Breed> cows;
+  late List<Cow> cows;
 }
 
-class Point {
+abstract class Cow {
+  late String? name;
+  @hasInverse("cows")
+  late Breed breed;
+  @hasInverse("cows")
+  late EnergyPoint energyPoint;
+}
+
+abstract class Point {
   late double latitude;
   late double longitude;
 }
@@ -32,4 +40,4 @@ class Hello {
   late String name;
 }
 
-abstract class Objects implements Breed, EnergyPoint {}
+abstract class Objects implements Breed, EnergyPoint, Cow {}

@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:aavu_admin/services/aavu.dart';
 import 'package:flutter/material.dart';
 
-class GosalaScreen extends StatefulWidget {
-  static const routeName = "gosala";
-  const GosalaScreen({Key? key}) : super(key: key);
+class EnergyPointScreen extends StatefulWidget {
+  static const routeName = "EnergyPoint";
+  const EnergyPointScreen({Key? key}) : super(key: key);
 
   @override
-  _GosalaScreenState createState() => _GosalaScreenState();
+  _EnergyPointScreenState createState() => _EnergyPointScreenState();
 }
 
-final List<Map<String, dynamic>> gosalas = [];
+final List<Map<String, dynamic>> EnergyPoints = [];
 
-class _GosalaScreenState extends State<GosalaScreen> {
+class _EnergyPointScreenState extends State<EnergyPointScreen> {
   String latLongStr = "";
 
   @override
@@ -22,7 +22,7 @@ class _GosalaScreenState extends State<GosalaScreen> {
         child: SingleChildScrollView(
       child: Column(
         children: [
-          AddGoshala(),
+          AddEnergyPoint(),
           Expanded(
               child: Padding(
                   padding: const EdgeInsets.only(top: 10, right: 30),
@@ -42,7 +42,7 @@ class _GosalaScreenState extends State<GosalaScreen> {
                         Text("update"),
                         Text("delete")
                       ]),
-                      ...gosalas.map((b) {
+                      ...EnergyPoints.map((b) {
                         var name = b["name"] as String?;
                         final id = b["id"] as String;
                         name = name ?? id;
@@ -87,7 +87,7 @@ class UpdateButton extends StatelessWidget {
       context: context,
       builder: (context) {
         return UpdateDialog(
-          gosala: breed,
+          EnergyPoint: breed,
         );
       },
     );
@@ -96,9 +96,9 @@ class UpdateButton extends StatelessWidget {
 }
 
 class UpdateDialog extends StatefulWidget {
-  final Map<String, dynamic> gosala;
+  final Map<String, dynamic> EnergyPoint;
 
-  const UpdateDialog({Key? key, required this.gosala}) : super(key: key);
+  const UpdateDialog({Key? key, required this.EnergyPoint}) : super(key: key);
 
   @override
   _UpdateDialogState createState() => _UpdateDialogState();
@@ -114,7 +114,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
   @override
   void initState() {
     super.initState();
-    final b = widget.gosala;
+    final b = widget.EnergyPoint;
     info = b["info"] as String;
     images = jsonEncode(b["images"]);
     infoController.text = info;
@@ -129,7 +129,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
           height: 10,
         ),
         Text(
-          "Gosala Update Form",
+          "EnergyPoint Update Form",
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
@@ -158,7 +158,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
                 child: Text("Cancel")),
             ElevatedButton(
                 onPressed: () {
-                  updateGoshala(context);
+                  updateEnergyPoint(context);
                 },
                 child: Text("Update")),
           ],
@@ -174,8 +174,8 @@ class _UpdateDialogState extends State<UpdateDialog> {
     );
   }
 
-  void updateGoshala(BuildContext context) async {
-    final b = widget.gosala;
+  void updateEnergyPoint(BuildContext context) async {
+    final b = widget.EnergyPoint;
     final initialInfo = b["info"] as String;
     if (info != initialInfo) {
       if (info.isEmpty) {
@@ -191,12 +191,12 @@ class _UpdateDialogState extends State<UpdateDialog> {
           patch["info"] = info;
         }
 
-        await GosalaServices.updateGoshala(id: name, patch: patch);
+        await EnergyPointServices.updateEnergyPoint(id: name, patch: patch);
         Navigator.pop(
-            context, <String, dynamic>{...widget.gosala, "info": info});
+            context, <String, dynamic>{...widget.EnergyPoint, "info": info});
       } catch (e) {
         setState(() {
-          error = "Error updating Gosala $e";
+          error = "Error updating EnergyPoint $e";
         });
       }
     } else {
@@ -207,14 +207,28 @@ class _UpdateDialogState extends State<UpdateDialog> {
   }
 }
 
-class AddGoshala extends StatefulWidget {
-  const AddGoshala({Key? key}) : super(key: key);
+class AddCow extends StatefulWidget {
+  const AddCow({Key? key}) : super(key: key);
 
   @override
-  _AddGoshalaState createState() => _AddGoshalaState();
+  _AddCowState createState() => _AddCowState();
 }
 
-class _AddGoshalaState extends State<AddGoshala> {
+class _AddCowState extends State<AddCow> {
+  @override
+  Widget build(BuildContext context) {
+    return Column();
+  }
+}
+
+class AddEnergyPoint extends StatefulWidget {
+  const AddEnergyPoint({Key? key}) : super(key: key);
+
+  @override
+  _AddEnergyPointState createState() => _AddEnergyPointState();
+}
+
+class _AddEnergyPointState extends State<AddEnergyPoint> {
   String latLng = "";
   String name = "";
   String year = "";
@@ -236,7 +250,7 @@ class _AddGoshalaState extends State<AddGoshala> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
-            decoration: InputDecoration(labelText: "Name of the Goshala"),
+            decoration: InputDecoration(labelText: "Name of the EnergyPoint"),
             onChanged: (value) {
               name = value.trim();
             },
@@ -253,15 +267,15 @@ class _AddGoshalaState extends State<AddGoshala> {
         ),
         ElevatedButton(
             onPressed: () {
-              addGoshala();
+              addEnergyPoint();
             },
-            child: Text("Add Goshala")),
+            child: Text("Add EnergyPoint")),
         Text(error)
       ],
     );
   }
 
-  void addGoshala() async {
+  void addEnergyPoint() async {
     if (latLng.isEmpty) {
       setState(() {
         error = "LatLng shouldnt be empty";
@@ -271,14 +285,14 @@ class _AddGoshalaState extends State<AddGoshala> {
     final latitide = double.parse(lla.first);
     final longtidue = double.parse(lla.last);
     try {
-      await GosalaServices.addGoshala(
+      await EnergyPointServices.addEnergyPoint(
           latitude: latitide,
           longitude: longtidue,
           name: name.isEmpty ? null : name,
           year: int.tryParse(year));
     } catch (e) {
       setState(() {
-        error = "Error while adding goshala $e";
+        error = "Error while adding EnergyPoint $e";
       });
     }
   }
@@ -344,7 +358,7 @@ class __DeleteDialogState extends State<_DeleteDialog> {
               ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.redAccent),
                   onPressed: () {
-                    deleteGoshala(context);
+                    deleteEnergyPoint(context);
                   },
                   child: Text("Yes"))
             ],
@@ -358,9 +372,9 @@ class __DeleteDialogState extends State<_DeleteDialog> {
     );
   }
 
-  void deleteGoshala(BuildContext context) async {
+  void deleteEnergyPoint(BuildContext context) async {
     try {
-      await GosalaServices.deleteGoshala(widget.id);
+      await EnergyPointServices.deleteEnergyPoint(widget.id);
     } catch (e) {
       setState(() {
         error = "$e";

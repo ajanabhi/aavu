@@ -1,5 +1,6 @@
 import 'package:aavu_admin/screens/breeds/breeds_screen.dart';
-import 'package:aavu_admin/screens/gosala/gosala_screen.dart';
+import 'package:aavu_admin/screens/cows/cows_screen.dart';
+import 'package:aavu_admin/screens/energy_point/energy_point.dart';
 import 'package:aavu_admin/screens/uploads/uploads_screen.dart';
 import 'package:aavu_admin/widgets/nav_wrapper/nav_wrapper.dart';
 import 'package:aavu_admin/screens/home/home_screen.dart';
@@ -11,6 +12,7 @@ abstract class Routes {
   static const uploads = "/uploads";
   static const breeds = "/breeds";
   static const gosalas = "/gosalas";
+  static const cows = "/cows";
   static MaterialPageRoute all(RouteSettings settings) {
     final url = settings.name;
     if (url == home) {
@@ -43,14 +45,28 @@ abstract class Routes {
       return MaterialPageRoute<dynamic>(builder: (context) {
         return Responsive(
             mobile: MobileTabletNavWrapper(
-              screen: GosalaScreen(),
+              screen: EnergyPointScreen(),
               name: uploads,
             ),
             tablet: MobileTabletNavWrapper(
-              screen: GosalaScreen(),
+              screen: EnergyPointScreen(),
               name: uploads,
             ),
-            desktop: DesktopNavWrapper(screen: GosalaScreen(), name: gosalas));
+            desktop:
+                DesktopNavWrapper(screen: EnergyPointScreen(), name: gosalas));
+      });
+    } else if (url == cows) {
+      return MaterialPageRoute<dynamic>(builder: (context) {
+        return Responsive(
+            mobile: MobileTabletNavWrapper(
+              screen: CowsScreen(),
+              name: uploads,
+            ),
+            tablet: MobileTabletNavWrapper(
+              screen: CowsScreen(),
+              name: uploads,
+            ),
+            desktop: DesktopNavWrapper(screen: CowsScreen(), name: cows));
       });
     } else {
       return MaterialPageRoute<dynamic>(builder: (context) {
