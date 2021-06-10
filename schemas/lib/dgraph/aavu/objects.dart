@@ -24,11 +24,14 @@ abstract class EnergyPoint {
 }
 
 abstract class Cow {
+  late ID id;
   late String? name;
   @hasInverse("cows")
   late Breed breed;
   @hasInverse("cows")
   late EnergyPoint energyPoint;
+  late int? age;
+  late double? milk;
 }
 
 abstract class Point {

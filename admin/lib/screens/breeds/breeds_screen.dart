@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:aavu_admin/services/aavu.dart';
+import 'package:aavu_admin/widgets/delete_dialog.dart';
 import 'package:flutter/material.dart';
 
 class BreedsScreen extends StatefulWidget {
@@ -61,7 +62,8 @@ class _BreedsScreenState extends State<BreedsScreen> {
                 breed: b,
               ),
               DeleteButton(
-                name: name,
+                id: name,
+                deleteCallback: (id) => BreedServices.deleteBreed(id),
               )
             ]);
           })
@@ -240,91 +242,6 @@ class _UpdateDialogState extends State<UpdateDialog> {
       Navigator.pop(
         context,
       );
-    }
-  }
-}
-
-class DeleteButton extends StatelessWidget {
-  final String name;
-
-  const DeleteButton({Key? key, required this.name}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {
-          showDeleteDialog(context);
-        });
-  }
-
-  void showDeleteDialog(BuildContext context) async {
-    final dynamic result = await showDialog<dynamic>(
-      context: context,
-      builder: (context) {
-        return _DeleteDialog(name: name);
-      },
-    );
-    print("Result $result");
-  }
-}
-
-class _DeleteDialog extends StatefulWidget {
-  final String name;
-
-  const _DeleteDialog({Key? key, required this.name}) : super(key: key);
-  @override
-  __DeleteDialogState createState() => __DeleteDialogState();
-}
-
-class __DeleteDialogState extends State<_DeleteDialog> {
-  String error = "";
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialog(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 20),
-          child: Text(
-            "Delete Breed Form",
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Text("Are you sure to delete breed ${widget.name} ?"),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancel"),
-              ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.redAccent),
-                  onPressed: () {
-                    deleteBreed(context);
-                  },
-                  child: Text("Yes"))
-            ],
-          ),
-        ),
-        Text(
-          error,
-          style: TextStyle(color: Colors.red),
-        )
-      ],
-    );
-  }
-
-  void deleteBreed(BuildContext context) async {
-    try {
-      await BreedServices.deleteBreed(widget.name);
-    } catch (e) {
-      setState(() {
-        error = "$e";
-      });
     }
   }
 }

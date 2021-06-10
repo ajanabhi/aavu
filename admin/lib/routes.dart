@@ -13,7 +13,7 @@ abstract class Routes {
   static const breeds = "/breeds";
   static const gosalas = "/gosalas";
   static const cows = "/cows";
-  static MaterialPageRoute all(RouteSettings settings) {
+  static MaterialPageRoute<dynamic> all(RouteSettings settings) {
     final url = settings.name;
     if (url == home) {
       return MaterialPageRoute<dynamic>(builder: (context) {

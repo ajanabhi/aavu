@@ -106,14 +106,6 @@ abstract class EnergyPointServices {
     try {
       final tempGS = await getEnergyPointDetails(latitude, longitude);
 
-      final query = """
-      mutation ag(\$input: [AddEnergyPointInput!]!) {
-        addEnergyPoint(input:\$input) {
-           id
-        }
-      }
-    """;
-
       final data = <String, dynamic>{
         "query": """
       mutation ag(\$input: [AddEnergyPointInput!]!) {
@@ -207,6 +199,8 @@ abstract class CowServices {
   static Future<dynamic> addCow(
       {required String energyPointId,
       required String breedId,
+      required int? age,
+      required double? milk,
       required String? name}) async {
     try {
       final data = <String, dynamic>{
@@ -221,6 +215,53 @@ abstract class CowServices {
           "name": name,
         }
       }; //TODO findout how to pass ids of relation ships
+
+      final resp = await dio.post<Map<String, dynamic>>(api_url,
+          data: data, options: _defaultOptions);
+      processResponse(resp);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<dynamic> updateCow(
+      {required String id, required Map<String, dynamic> patch}) async {
+    try {
+      final data = {
+        "query": """
+  mutation upb(\$id: String!, \$patch: CowPatch!) {
+   updateEnergyPoint(input:{ filter: {id:{eq:\$id}},set:\$patch}) {
+     breed {
+        name
+     }
+   }
+ }
+  """,
+        "variables": {"id": id, "patch": patch}
+      };
+
+      final resp = await dio.post<Map<String, dynamic>>(api_url,
+          options: _defaultOptions, data: data);
+      processResponse(resp);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<void> deleteCow(String id) async {
+    try {
+      final data = {
+        "query": """
+       mutation db(\$id: String!) {
+  deleteCow(filter:{id:{eq:\$name}}) {
+    breed {
+      name
+    }
+  }
+}
+      """,
+        "variables": {"id": id}
+      };
 
       final resp = await dio.post<Map<String, dynamic>>(api_url,
           data: data, options: _defaultOptions);
